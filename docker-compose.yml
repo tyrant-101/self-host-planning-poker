@@ -10,7 +10,7 @@ services:
       - /etc/letsencrypt/live/chiselpigs.co.uk/privkey.pem:/etc/letsencrypt/live/chiselpigs.co.uk/privkey.pem:ro
     restart: unless-stopped
   scrum-poker:
-    image: axeleroy/self-host-planning-poker:latest
+    build: .
     ports:
       - 8000:8000
     volumes:
