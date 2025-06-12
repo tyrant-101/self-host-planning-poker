@@ -1,0 +1,23 @@
+services:
+  nginx:
+    image: nginx:1-alpine
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf:ro
+      - /etc/letsencrypt/live/chiselpigs.co.uk/fullchain.pem:/etc/letsencrypt/live/chiselpigs.co.uk/fullchain.pem:ro
+      - /etc/letsencrypt/live/chiselpigs.co.uk/privkey.pem:/etc/letsencrypt/live/chiselpigs.co.uk/privkey.pem:ro
+    restart: unless-stopped
+  scrum-poker:
+    image: axeleroy/self-host-planning-poker:latest
+    ports:
+      - 8000:8000
+    volumes:
+      - planning-poker-data:/data
+    environment:
+      - APP_ROOT=/scrum-poker/
+    restart: unless-stopped
+
+volumes:
+  planning-poker-data: {}
