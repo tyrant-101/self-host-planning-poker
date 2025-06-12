@@ -26,7 +26,7 @@ if app.config['DEBUG']:
 else:
     check_db_file_permissions()
     real_db = SqliteDatabase('/data/database.db')
-    socketio = SocketIO(app)
+    socketio = SocketIO(app, cors_allowed_origins=["https://chiselpigs.co.uk"])
 database_proxy.initialize(real_db)
 if database_proxy.is_closed():
     database_proxy.connect()
